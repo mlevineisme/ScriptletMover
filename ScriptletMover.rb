@@ -19,11 +19,11 @@ files.delete(GIT_FILE) if files.include?(GIT_FILE)
 # Copy the source files into the destination directories
 directory_paths.each {|path|
    
-   # Give write access to the files, so they can be overwritten if "read only"
+   # Give write access to the files in team, so they can be overwritten if "read only"
    files.each {|file|
       FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if path.include?("team") and File.exist?("#{path}\\#{file}")}
 
-   # Copy the files
+   # Copy the files to their new directory
    if (File.directory?(path))
       FileUtils.cp [*files], path, :preserve => true
       puts "Files copied to: #{path}"
