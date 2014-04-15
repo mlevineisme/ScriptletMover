@@ -2,6 +2,7 @@ require 'FileUtils'
 
 # This is a config value that may need to be changed
 DIRECTORY_CONFIG_NAME = "ScriptletMover.conf"
+GIT_FILE = "README.md"
 
 SOURCE_FOLDER = FileUtils.pwd
 puts "The source folder used to move the Scriptlet files from: #{SOURCE_FOLDER}"
@@ -13,7 +14,7 @@ DIRECTORY_CONFIG.each_line {|line| directory_paths << line.chomp}
 files = Dir.glob("*.*")
 files.delete(DIRECTORY_CONFIG_NAME)
 files.delete(__FILE__.split("/").last)
-files.delete("README.md")
+files.delete(GIT_FILE) if files.include?(GIT_FILE)
 
 # Copy the source files into the destination directories
 directory_paths.each {|path|
