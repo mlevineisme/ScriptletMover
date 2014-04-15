@@ -21,8 +21,12 @@ directory_paths.each {|path|
    
    # Give write access to the files, so they can be overwritten if "read only"
    files.each {|file|
-      FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}")} if path.include?("team")
+      FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if path.include?("team") and File.exist?("#{path}\\#{file}")}
 
    # Copy the files
-   FileUtils.cp [*files], path, :preserve => true
-   puts "Files copied to: #{path}"}
+   if (File.directory?(path))
+      FileUtils.cp [*files], path, :preserve => true
+      puts "Files copied to: #{path}"
+   else
+      puts "Files were not copied to #{path}, because the path was invalid"
+   end}
