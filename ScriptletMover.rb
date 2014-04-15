@@ -14,11 +14,12 @@ DIR_CONF_FILE.each_line {|line| directory_paths << line.chomp}
 filesToMove = Dir.glob("*Scriptlets.*")
 
 #-- Copy the source files into the destination directories
-directory_paths.each {|path|
+directory_paths.each do |path|
    
    #-- Give write access to the files in team, so "read only" files can be overwritten
-   filesToMove.each {|file|
-      FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if path.include?("team") and File.exist?("#{path}\\#{file}")}
+   filesToMove.each do |file|
+      FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if path.include?("team") and File.exist?("#{path}\\#{file}")
+   end
 
    #-- Copy the files to their new directory
    if (File.directory?(path))
@@ -26,4 +27,5 @@ directory_paths.each {|path|
       puts "Files copied to: #{path}"
    else
       puts "Files were not copied to #{path}, because the path was invalid"
-   end}
+   end
+end
