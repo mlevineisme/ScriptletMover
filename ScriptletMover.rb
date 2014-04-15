@@ -23,5 +23,5 @@ directory_paths.each {|path|
       FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}")}
 
    # Copy the files
-   FileUtils.cp [*files], path
+   FileUtils.cp [*files], path, :preserve => true
    puts "Files copied to: #{path}"}
