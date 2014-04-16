@@ -38,7 +38,7 @@ directory_paths.each do |path|
    #-- Give write access to the destination, so "read only" files can be overwritten.
    filesToMove.each do |file|
       begin
-         FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if (File.exist?("#{path}\\#{file}"))
+         FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if (File.exist?("#{path}\\#{file}")) and !(File.writable?("#{path}\\#{file}"))
       rescue
          print_err "A problem arose when trying to adjust the permissions settings on pre-copy destination files"
       end
