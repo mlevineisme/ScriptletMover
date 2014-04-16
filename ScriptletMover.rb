@@ -9,6 +9,7 @@ def print_err errorMsg
    puts $!.backtrace
 end
 
+NAME_STRING = "Scriptlets"
 SOURCE_FOLDER = FileUtils.pwd
 puts "The Scriptlet Source Folder Is: #{SOURCE_FOLDER}\n\n"
 DIRECTORY_CONFIG_NAME = "#{File.basename(__FILE__, ".rb")}.conf"
@@ -26,7 +27,7 @@ DIR_CONF_FILE.each_line {|line| directory_paths << line.chomp}
 #-- Collect the source Scriptlet file names and modification times
 begin
    #-- Gather the files list
-   filesToMove = Dir.glob("*Scriptlets.*")
+   filesToMove = Dir.glob("*#{NAME_STRING}.*")
    filesToMoveTimes = filesToMove.collect {|file| File.mtime(file)}
 rescue
    print_err "A problem arose when trying to find the source Scriptlet files or their timestamps"
