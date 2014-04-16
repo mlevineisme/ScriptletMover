@@ -35,9 +35,9 @@ end
 #-- Copy the source files into the destination directories
 directory_paths.each do |path|
    
-   #-- Give write access to the files in team, so "read only" files can be overwritten
+   #-- Give write access to the destination, so "read only" files can be overwritten.
    filesToMove.each do |file|
-      FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if (path.include?("team") and File.exist?("#{path}\\#{file}"))
+      FileUtils.chmod("u=wrx,go=rx", "#{path}\\#{file}") if (File.exist?("#{path}\\#{file}"))
    end
 
    begin
@@ -67,4 +67,5 @@ directory_paths.each do |path|
    rescue
       print_err "A problem arose when trying to copy the files"
    end
+   DIR_CONF_FILE.close
 end
