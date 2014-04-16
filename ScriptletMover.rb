@@ -71,5 +71,5 @@ directory_paths.each do |path|
    rescue
       print_err "A problem arose when trying to copy the files"
    end
-   DIR_CONF_FILE.close
 end
+DIR_CONF_FILE.close
