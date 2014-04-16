@@ -47,7 +47,6 @@ directory_paths.each do |path|
 
          #-- Compare the source and destination file modification times as an extra
          # verification that the files were correctly copied
-         currentFile = 0
          filesEqual = Array.new
          filesToMove.each do |file|
             if File.mtime("#{path}\\#{file}").eql?(File.mtime(file))
